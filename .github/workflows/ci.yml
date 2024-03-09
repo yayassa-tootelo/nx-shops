@@ -14,16 +14,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          version: "20.x"
+          node-version: "20.x"
           cache: 'npm'
-      - name: Restore cached npm dependencies
-        id: cache-dependencies-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            node_modules
-            ~/.cache/Cypress # needed for the Cypress binary
-          key: npm-dependencies-${{ hashFiles('package-lock.json') }}
       - run: npm install --frozen-lockfile
       - name: Cache npm dependencies
         id: cache-dependencies-save
@@ -36,5 +28,5 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       # This line is needed for nx affected to work when CI is running on a PR
       - run: git branch --track main origin/main
-      - run: nx affected -t lint test build --parallel=3
-      - run: nx affected -t e2e --parallel=1
+      - run: npm run affected:lint-test-build
+      - run: npm run affected:e2e
