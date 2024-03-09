@@ -17,14 +17,6 @@ jobs:
           node-version: "20.x"
           cache: 'npm'
       - run: npm install --frozen-lockfile
-      - name: Cache npm dependencies
-        id: cache-dependencies-save
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            node_modules
-            ~/.cache/Cypress # needed for the Cypress binary
-          key: ${{ steps.cache-dependencies-restore.outputs.cache-primary-key }}
       - uses: nrwl/nx-set-shas@v3
       # This line is needed for nx affected to work when CI is running on a PR
       - run: git branch --track main origin/main
