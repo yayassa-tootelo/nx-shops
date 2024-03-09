@@ -13,7 +13,9 @@
     "format:check": "nx format:check",
     "graph": "nx graph",
     "help": "nx help",
-    "nx": "nx"
+    "nx": "nx",
+    "affected:lint-test-build": "nx affected -t lint test build --parallel=3",
+    "affected:e2e": "nx affected -t e2e --parallel=1"
   },
   "private": true,
   "packageManager": "pnpm@8.9.2",
